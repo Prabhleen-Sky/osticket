@@ -71,6 +71,45 @@ class API {
         return ($this->ht['can_create_tickets']);
     }
 
+     //Potentially future add ability to configure in gui.
+     function canViewTickets() {
+        return true;
+    }
+    function canUpdateTickets() {
+        return $this->canCreateTickets();
+    }
+    function canCloseTickets() {
+        return $this->canCreateTickets();
+    }
+    function canReopenTickets() {
+        return $this->canCreateTickets();
+    }
+    function canPostReplyToTickets() {
+        return $this->canCreateTickets();
+    }
+    function canViewTopics() {
+        return true;
+    }
+    function canViewUser() {
+        return true;
+    }
+    function canAddUser() {
+        return true;
+    }
+    function canDeleteUser() {
+        return true;
+    }
+    function canViewOrganization() {
+        return true;
+    }
+    function canAddOrganization() {
+        return true;
+    }
+    function canDeleteOrganization() {
+        return true;
+    }
+    
+
     function canExecuteCron() {
         return ($this->ht['can_exec_cron']);
     }
