@@ -26,12 +26,13 @@ require_once INCLUDE_DIR . "class.dispatcher.php";
 $dispatcher = patterns(
         '',
         url_post("^/tickets\.(?P<format>xml|json|email)$", array('api.tickets.php:TicketApiController', 'create')),
-        url_get("^/tickets\.(?P<format>xml|json|email)$", array('api.tickets.php:TicketApiController', 'getTickets')),
+        // url_get("^/tickets\.(?P<format>xml|json|email)$", array('api.tickets.php:TicketApiController', 'getTickets')),
 
         // url_get("^/tickets\.(?P<tid>)$", array('api.tickets.php:TicketApiController', 'getTicket')),
 
         //Added Ticket Endpoints
-        url_get("^/tickets\.(?P<format>xml|json)/(?P<tid>\d+)$", array('api.tickets.php:TicketApiController', 'getTicket')),  //Do first!
+        url_get("^/tickets\.(?P<format>xml|json)/(?P<tid>OP-\d+)$", array('api.tickets.php:TicketApiController', 'getTicket')),
+        // url_get("^/tickets\.(?P<format>xml|json)/(?P<tid>\d+)$", array('api.tickets.php:TicketApiController', 'getTicket')),  //Do first!
         url_get("^/tickets\.(?P<format>xml|json)", array('api.tickets.php:TicketApiController', 'getTickets')),
         url_post("^/tickets\.(?P<format>xml|json)/(?P<tid>\d+)$", array('api.tickets.php:TicketApiController', 'reopenTicket')),
         url_put("^/tickets\.(?P<format>xml|json)/(?P<tid>\d+)$", array('api.tickets.php:TicketApiController', 'updateTicket')),
