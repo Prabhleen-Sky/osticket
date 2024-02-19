@@ -31,7 +31,7 @@ $dispatcher = patterns(
         // url_get("^/tickets\.(?P<tid>)$", array('api.tickets.php:TicketApiController', 'getTicket')),
 
         //Added Ticket Endpoints
-        url_get("^/tickets\.(?P<format>xml|json)/(?P<tid>OP-\d+)$", array('api.tickets.php:TicketApiController', 'getTicket')),
+        url_get("^/tickets\.(?P<format>xml|json)/(?P<tid>TN-\d+)$", array('api.tickets.php:TicketApiController', 'getTicket')),
         // url_get("^/tickets\.(?P<format>xml|json)/(?P<tid>\d+)$", array('api.tickets.php:TicketApiController', 'getTicket')),  //Do first!
         url_get("^/tickets\.(?P<format>xml|json)", array('api.tickets.php:TicketApiController', 'getTickets')),
         url_post("^/tickets\.(?P<format>xml|json)/(?P<tid>\d+)$", array('api.tickets.php:TicketApiController', 'reopenTicket')),

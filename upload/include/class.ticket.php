@@ -633,6 +633,11 @@ implements RestrictedAccess, Threadable, Searchable {
         return null;
     }
 
+    function getCategory(){
+        // die($this->category);
+        return (string) $this->getAnswer('category');
+    }
+
     function getPriorityField() {
         if (($a = $this->getAnswer('priority')))
             return $a->getField();
@@ -4845,11 +4850,13 @@ EOF;
         $topic=$this->getTopic();
         $status=$this->getStatus();
         $priority=$this->getPriority();
+        // $category=$this->getCategory();
         return [
             'id' => $this->getNumber(),
             'subject' => $this->getSubject(),
             'topic' => ['id' => $topic->getId(), 'name' => $topic->getName()],
             'status' => ['id' => $status->getId(), 'name' => $status->getName()],
+            'category' => $this->getCategory(),
             'priority' => ['id' => $priority->getId(), 'name' => $priority->getTag()],
             'department' => $this->getDeptName(),
             'timestamps' => [
