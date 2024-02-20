@@ -105,8 +105,6 @@ class TicketApiController extends ApiController {
 
 
     public function create($format) {
-        // die("deadea");
-
         if(!($key=$this->requireApiKey()) || !$key->canCreateTickets())
             return $this->exerr(401, __('API key not authorized'));
 
@@ -130,7 +128,7 @@ class TicketApiController extends ApiController {
             return $this->exerr(500, __("Unable to create new ticket: unknown error"));
 
         // $this->response(201, $ticket->getNumber());
-        $this->response(201, json_encode($ticket->getTicketApiEntity()));
+        $this->response(201, json_encode(['status' => 'success','data' => $ticket->getTicketApiEntity()]));
     }
 
     ######  Added Methods ############
@@ -139,7 +137,6 @@ class TicketApiController extends ApiController {
     //TBD whether camelcase or underscore property names are desired by osTicket.
 
     public function getTickets($format) {
-        // die("mmmmmmmmmmmmmmmmmmmmmmm");
         //Future:  Allow for optional filtering for name and topic ID
         if(!($key=$this->requireApiKey()) || !$key->canViewTickets())
             return $this->exerr(401, __('API key not authorized'));
@@ -151,15 +148,15 @@ class TicketApiController extends ApiController {
         foreach(Ticket::objects()->filter($filter)->all() as $ticket) {
             $tickets[]=$ticket->getTicketApiEntity();
         }
-        $this->response(200, json_encode($tickets));
+
+        $this->response(200, json_encode(['status'=>'success','data' => $tickets]));
     }
 
     public function getTicket($format,$tid) {
         //This API request does not need to provide user identifier.
-        // die("deded");
         if(!($key=$this->requireApiKey()) || !$key->canViewTickets())
             return $this->exerr(401, __('API key not authorized'));
-        $this->response(200, json_encode($this->getByTicketId($tid)->getTicketApiEntity()));
+        $this->response(200, json_encode(['status'=>'success','data'=>$this->getByTicketId($tid)->getTicketApiEntity()]));
     }
 
     public function closeTicket($format, $tid) {

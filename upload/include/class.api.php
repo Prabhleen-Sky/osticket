@@ -396,7 +396,8 @@ class ApiController
     //Default response method - can be overwritten in subclasses.
     function response($code, $resp)
     {
-        if ($code == '201') {
+        $successCodes = ['200', '201', '202', '203', '204', '205', '206', '207', '208', '226'];
+        if (in_array($code, $successCodes)) {
             header('HTTP/1.1 ' . Http::header_code_verbose($code));
             header('Status: ' . Http::header_code_verbose($code) . "\r\n");
             header("Connection: Close\r\n");

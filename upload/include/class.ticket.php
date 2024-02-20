@@ -4852,8 +4852,6 @@ EOF;
         $priority=$this->getPriority();
         // $category=$this->getCategory();
         $response =  [
-            'status' => 'success',
-            'data' => [
                 'id' => $this->getNumber(),
                 'subject' => $this->getSubject(),
                 'topic' => ['id' => $topic->getId(), 'name' => $topic->getName()],
@@ -4878,7 +4876,6 @@ EOF;
                 'source' => $this->getSource(),
                 'assigned_to' => $this->getAssignees(),
                 'threads' =>$thread_entries
-             ]
         ];
         return $response;
     }
