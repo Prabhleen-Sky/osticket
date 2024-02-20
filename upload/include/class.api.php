@@ -1,4 +1,5 @@
 <?php
+
 /*********************************************************************
     class.api.php
 
@@ -12,25 +13,28 @@
     See LICENSE.TXT for details.
 
     vim: expandtab sw=4 ts=4 sts=4:
-**********************************************************************/
-class API {
+ **********************************************************************/
+class API
+{
 
     var $id;
 
     var $ht;
 
-    function __construct($id) {
+    function __construct($id)
+    {
         $this->id = 0;
         $this->load($id);
     }
 
-    function load($id=0) {
+    function load($id = 0)
+    {
 
-        if(!$id && !($id=$this->getId()))
+        if (!$id && !($id = $this->getId()))
             return false;
 
-        $sql='SELECT * FROM '.API_KEY_TABLE.' WHERE id='.db_input($id);
-        if(!($res=db_query($sql)) || !db_num_rows($res))
+        $sql = 'SELECT * FROM ' . API_KEY_TABLE . ' WHERE id=' . db_input($id);
+        if (!($res = db_query($sql)) || !db_num_rows($res))
             return false;
 
         $this->ht = db_fetch_array($res);
@@ -39,84 +43,106 @@ class API {
         return true;
     }
 
-    function reload() {
+    function reload()
+    {
         return $this->load();
     }
 
-    function getId() {
+    function getId()
+    {
         return $this->id;
     }
 
-    function getKey() {
+    function getKey()
+    {
         return $this->ht['apikey'];
     }
 
-    function getIPAddr() {
+    function getIPAddr()
+    {
         return $this->ht['ipaddr'];
     }
 
-    function getNotes() {
+    function getNotes()
+    {
         return $this->ht['notes'];
     }
 
-    function getHashtable() {
+    function getHashtable()
+    {
         return $this->ht;
     }
 
-    function isActive() {
+    function isActive()
+    {
         return ($this->ht['isactive']);
     }
 
-    function canCreateTickets() {
+    function canCreateTickets()
+    {
         return ($this->ht['can_create_tickets']);
     }
 
-     //Potentially future add ability to configure in gui.
-     function canViewTickets() {
+    //Potentially future add ability to configure in gui.
+    function canViewTickets()
+    {
         return true;
     }
-    function canUpdateTickets() {
+    function canUpdateTickets()
+    {
         return $this->canCreateTickets();
     }
-    function canCloseTickets() {
+    function canCloseTickets()
+    {
         return $this->canCreateTickets();
     }
-    function canReopenTickets() {
+    function canReopenTickets()
+    {
         return $this->canCreateTickets();
     }
-    function canPostReplyToTickets() {
+    function canPostReplyToTickets()
+    {
         return $this->canCreateTickets();
     }
-    function canViewTopics() {
+    function canViewTopics()
+    {
         return true;
     }
-    function canViewUser() {
+    function canViewUser()
+    {
         return true;
     }
-    function canAddUser() {
+    function canAddUser()
+    {
         return true;
     }
-    function canDeleteUser() {
+    function canDeleteUser()
+    {
         return true;
     }
-    function canViewOrganization() {
+    function canViewOrganization()
+    {
         return true;
     }
-    function canAddOrganization() {
+    function canAddOrganization()
+    {
         return true;
     }
-    function canDeleteOrganization() {
+    function canDeleteOrganization()
+    {
         return true;
     }
-    
 
-    function canExecuteCron() {
+
+    function canExecuteCron()
+    {
         return ($this->ht['can_exec_cron']);
     }
 
-    function update($vars, &$errors) {
+    function update($vars, &$errors)
+    {
 
-        if(!API::save($this->getId(), $vars, $errors))
+        if (!API::save($this->getId(), $vars, $errors))
             return false;
 
         $this->reload();
@@ -124,73 +150,81 @@ class API {
         return true;
     }
 
-    function delete() {
-        $sql='DELETE FROM '.API_KEY_TABLE.' WHERE id='.db_input($this->getId()).' LIMIT 1';
-        return (db_query($sql) && ($num=db_affected_rows()));
+    function delete()
+    {
+        $sql = 'DELETE FROM ' . API_KEY_TABLE . ' WHERE id=' . db_input($this->getId()) . ' LIMIT 1';
+        return (db_query($sql) && ($num = db_affected_rows()));
     }
 
     /** Static functions **/
-    static function add($vars, &$errors) {
+    static function add($vars, &$errors)
+    {
         return API::save(0, $vars, $errors);
     }
 
-    static function validate($key, $ip) {
+    static function validate($key, $ip)
+    {
         return ($key && $ip && self::getIdByKey($key, $ip));
     }
 
-    static function getIdByKey($key, $ip='') {
+    static function getIdByKey($key, $ip = '')
+    {
 
-        $sql='SELECT id FROM '.API_KEY_TABLE.' WHERE apikey='.db_input($key);
-        if($ip)
-            $sql.=' AND ipaddr='.db_input($ip);
+        $sql = 'SELECT id FROM ' . API_KEY_TABLE . ' WHERE apikey=' . db_input($key);
+        if ($ip)
+            $sql .= ' AND ipaddr=' . db_input($ip);
 
-        if(($res=db_query($sql)) && db_num_rows($res))
+        if (($res = db_query($sql)) && db_num_rows($res))
             list($id) = db_fetch_row($res);
 
         return $id;
     }
 
-    static function lookupByKey($key, $ip='') {
+    static function lookupByKey($key, $ip = '')
+    {
         return self::lookup(self::getIdByKey($key, $ip));
     }
 
-    static function lookup($id) {
-        return ($id && is_numeric($id) && ($k= new API($id)) && $k->getId()==$id)?$k:null;
+    static function lookup($id)
+    {
+        return ($id && is_numeric($id) && ($k = new API($id)) && $k->getId() == $id) ? $k : null;
     }
 
-    static function save($id, $vars, &$errors) {
+    static function save($id, $vars, &$errors)
+    {
 
-        if(!$id && (!$vars['ipaddr'] || !Validator::is_ip($vars['ipaddr'])))
+        if (!$id && (!$vars['ipaddr'] || !Validator::is_ip($vars['ipaddr'])))
             $errors['ipaddr'] = __('Valid IP is required');
 
-        if($errors) return false;
+        if ($errors) return false;
 
-        $sql=' updated=NOW() '
-            .',isactive='.db_input($vars['isactive'])
-            .',can_create_tickets='.db_input($vars['can_create_tickets'])
-            .',can_exec_cron='.db_input($vars['can_exec_cron'])
-            .',notes='.db_input(Format::sanitize($vars['notes']));
+        $sql = ' updated=NOW() '
+            . ',isactive=' . db_input($vars['isactive'])
+            . ',can_create_tickets=' . db_input($vars['can_create_tickets'])
+            . ',can_exec_cron=' . db_input($vars['can_exec_cron'])
+            . ',notes=' . db_input(Format::sanitize($vars['notes']));
 
-        if($id) {
-            $sql='UPDATE '.API_KEY_TABLE.' SET '.$sql.' WHERE id='.db_input($id);
-            if(db_query($sql))
+        if ($id) {
+            $sql = 'UPDATE ' . API_KEY_TABLE . ' SET ' . $sql . ' WHERE id=' . db_input($id);
+            if (db_query($sql))
                 return true;
 
-            $errors['err']=sprintf(__('Unable to update %s.'), __('this API key'))
-               .' '.__('Internal error occurred');
-
+            $errors['err'] = sprintf(__('Unable to update %s.'), __('this API key'))
+                . ' ' . __('Internal error occurred');
         } else {
-            $sql='INSERT INTO '.API_KEY_TABLE.' SET '.$sql
-                .',created=NOW() '
-                .',ipaddr='.db_input($vars['ipaddr'])
-                .',apikey='.db_input(strtoupper(md5(time().$vars['ipaddr'].md5(Misc::randCode(16)))));
+            $sql = 'INSERT INTO ' . API_KEY_TABLE . ' SET ' . $sql
+                . ',created=NOW() '
+                . ',ipaddr=' . db_input($vars['ipaddr'])
+                . ',apikey=' . db_input(strtoupper(md5(time() . $vars['ipaddr'] . md5(Misc::randCode(16)))));
 
-            if(db_query($sql) && ($id=db_insert_id()))
+            if (db_query($sql) && ($id = db_insert_id()))
                 return $id;
 
-            $errors['err']=sprintf('%s %s',
+            $errors['err'] = sprintf(
+                '%s %s',
                 sprintf(__('Unable to add %s.'), __('this API key')),
-                __('Correct any errors below and try again.'));
+                __('Correct any errors below and try again.')
+            );
         }
 
         return false;
@@ -204,23 +238,26 @@ class API {
  * API request.
  */
 
-class ApiController {
+class ApiController
+{
 
     var $apikey;
 
-    function requireApiKey() {
+    function requireApiKey()
+    {
         # Validate the API key -- required to be sent via the X-API-Key
         # header
 
-        if(!($key=$this->getApiKey()))
+        if (!($key = $this->getApiKey()))
             return $this->exerr(401, __('Valid API key required'));
-        elseif (!$key->isActive() || $key->getIPAddr()!=$_SERVER['REMOTE_ADDR'])
+        elseif (!$key->isActive() || $key->getIPAddr() != $_SERVER['REMOTE_ADDR'])
             return $this->exerr(401, __('API key not found/active or source IP not authorized'));
 
         return $key;
     }
 
-    function getApiKey() {
+    function getApiKey()
+    {
 
         if (!$this->apikey && isset($_SERVER['HTTP_X_API_KEY']) && isset($_SERVER['REMOTE_ADDR']))
             $this->apikey = API::lookupByKey($_SERVER['HTTP_X_API_KEY'], $_SERVER['REMOTE_ADDR']);
@@ -233,16 +270,17 @@ class ApiController {
      * hashtable. For JSON formats, this is mostly a noop, the conversion
      * work will be done for XML requests
      */
-    function getRequest($format) {
+    function getRequest($format)
+    {
         global $ost;
 
-        $input = osTicket::is_cli()?'php://stdin':'php://input';
+        $input = osTicket::is_cli() ? 'php://stdin' : 'php://input';
 
         if (!($stream = @fopen($input, 'r')))
             $this->exerr(400, __("Unable to read request body"));
 
         $parser = null;
-        switch(strtolower($format)) {
+        switch (strtolower($format)) {
             case 'xml':
                 if (!function_exists('xml_parser_create'))
                     $this->exerr(501, __('XML extension not supported'));
@@ -268,7 +306,8 @@ class ApiController {
         return $data;
     }
 
-    function getEmailRequest() {
+    function getEmailRequest()
+    {
         return $this->getRequest('email');
     }
 
@@ -277,16 +316,20 @@ class ApiController {
      * Structure to validate the request against -- must be overridden to be
      * useful
      */
-    function getRequestStructure($format, $data=null) { return array(); }
+    function getRequestStructure($format, $data = null)
+    {
+        return array();
+    }
     /**
      * Simple validation that makes sure the keys of a parsed request are
      * expected. It is assumed that the functions actually implementing the
      * API will further validate the contents of the request
      */
-    function validateRequestStructure($data, $structure, $prefix="", $strict=true) {
+    function validateRequestStructure($data, $structure, $prefix = "", $strict = true)
+    {
         global $ost;
 
-        foreach ($data as $key=>$info) {
+        foreach ($data as $key => $info) {
             if (is_array($structure) && (is_array($info) || $info instanceof ArrayAccess)) {
                 $search = (isset($structure[$key]) && !is_numeric($key)) ? $key : "*";
                 if (isset($structure[$search])) {
@@ -299,9 +342,11 @@ class ApiController {
             if ($strict)
                 return $this->exerr(400, sprintf(__("%s: Unexpected data received in API request"), "$prefix$key"));
             else
-                $ost->logWarning(__('API Unexpected Data'),
+                $ost->logWarning(
+                    __('API Unexpected Data'),
                     sprintf(__("%s: Unexpected data received in API request"), "$prefix$key"),
-                    false);
+                    false
+                );
         }
 
         return true;
@@ -311,12 +356,14 @@ class ApiController {
      * Validate request.
      *
      */
-    function validate(&$data, $format, $strict=true) {
+    function validate(&$data, $format, $strict = true)
+    {
         return $this->validateRequestStructure(
-                $data,
-                $this->getRequestStructure($format, $data),
-                "",
-                $strict);
+            $data,
+            $this->getRequestStructure($format, $data),
+            "",
+            $strict
+        );
     }
 
     /**
@@ -325,53 +372,86 @@ class ApiController {
      */
 
     /* If possible - DO NOT - overwrite the method downstream */
-    function exerr($code, $error='') {
+    function exerr($code, $error = '')
+    {
         global $ost;
 
-        if($error && is_array($error))
+        if ($error && is_array($error))
             $error = Format::array_implode(": ", "\n", $error);
 
         //Log the error as a warning - include api key if available.
         $msg = $error;
-        if($_SERVER['HTTP_X_API_KEY'])
-            $msg.="\n*[".$_SERVER['HTTP_X_API_KEY']."]*\n";
-        $ost->logWarning(__('API Error')." ($code)", $msg, false);
+        if ($_SERVER['HTTP_X_API_KEY'])
+            $msg .= "\n*[" . $_SERVER['HTTP_X_API_KEY'] . "]*\n";
+        $ost->logWarning(__('API Error') . " ($code)", $msg, false);
 
         if (PHP_SAPI == 'cli') {
             fwrite(STDERR, "({$code}) $error\n");
-        }
-        else {
+        } else {
             $this->response($code, $error); //Responder should exit...
         }
         return false;
     }
 
     //Default response method - can be overwritten in subclasses.
-    function response($code, $resp) {
-        Http::response($code, $resp);
+    function response($code, $resp)
+    {
+        if ($code == '201') {
+            header('HTTP/1.1 ' . Http::header_code_verbose($code));
+            header('Status: ' . Http::header_code_verbose($code) . "\r\n");
+            header("Connection: Close\r\n");
+            $ct = "Content-Type: application/json";
+            if ('UTF-8')
+                $ct .= "; charset=UTF-8";
+            header($ct);
+            if (is_string($resp)) {
+                header('Content-Length: ' . strlen($resp) . "\r\n\r\n");
+                print $resp;
+                exit;
+            }
+            // Http::response($code, $resp);
+        } else {
+            $json = json_encode(['status' => 'failed', 'message' => $resp]);
+            header('HTTP/1.1 ' . Http::header_code_verbose($code));
+            header('Status: ' . Http::header_code_verbose($code) . "\r\n");
+            header("Connection: Close\r\n");
+            $ct = "Content-Type: application/json";
+            if ('UTF-8')
+                $ct .= "; charset=UTF-8";
+            header($ct);
+            if (is_string($json)) {
+                header('Content-Length: ' . strlen($json) . "\r\n\r\n");
+                print $json;
+                exit;
+            }
+            // Http::response($code, $json);
+        }
         exit();
     }
 }
 
 include_once "class.xml.php";
-class ApiXmlDataParser extends XmlDataParser {
+class ApiXmlDataParser extends XmlDataParser
+{
 
-    function parse($stream) {
+    function parse($stream)
+    {
         return $this->fixup(parent::parse($stream));
     }
     /**
      * Perform simple operations to make data consistent between JSON and
      * XML data types
      */
-    function fixup($current) {
+    function fixup($current)
+    {
         global $cfg;
 
-		if($current['ticket'])
-			$current = $current['ticket'];
+        if ($current['ticket'])
+            $current = $current['ticket'];
 
         if (!is_array($current))
             return $current;
-        foreach ($current as $key=>&$value) {
+        foreach ($current as $key => &$value) {
             if ($key == "phone" && is_array($value)) {
                 $value = $value[":text"];
             } else if ($key == "alert") {
@@ -396,19 +476,18 @@ class ApiXmlDataParser extends XmlDataParser {
                     $value = new HtmlThreadEntryBody($value['body']);
                 else
                     $value = new TextThreadEntryBody($value['body']);
-
             } else if ($key == "attachments") {
-                if(isset($value['file']) && !isset($value['file'][':text']))
+                if (isset($value['file']) && !isset($value['file'][':text']))
                     $value = $value['file'];
 
-                if($value && is_array($value)) {
+                if ($value && is_array($value)) {
                     foreach ($value as &$info) {
                         $info["data"] = $info[":text"];
                         unset($info[":text"]);
                     }
                     unset($info);
                 }
-            } else if(is_array($value)) {
+            } else if (is_array($value)) {
                 $value = $this->fixup($value);
             }
         }
@@ -419,14 +498,17 @@ class ApiXmlDataParser extends XmlDataParser {
 }
 
 include_once "class.json.php";
-class ApiJsonDataParser extends JsonDataParser {
-    static function parse($stream, $tidy=false) {
+class ApiJsonDataParser extends JsonDataParser
+{
+    static function parse($stream, $tidy = false)
+    {
         return self::fixup(parent::parse($stream));
     }
-    static function fixup($current) {
+    static function fixup($current)
+    {
         if (!is_array($current))
             return $current;
-        foreach ($current as $key=>&$value) {
+        foreach ($current as $key => &$value) {
             if ($key == "phone") {
                 $value = strtoupper($value);
             } else if ($key == "alert") {
@@ -441,7 +523,6 @@ class ApiJsonDataParser extends JsonDataParser {
                     $value = new HtmlThreadEntryBody($data['data']);
                 else
                     $value = new TextThreadEntryBody($data['data']);
-
             } else if ($key == "attachments") {
                 foreach ($value as &$info) {
                     $data = reset($info);
@@ -464,29 +545,31 @@ class ApiJsonDataParser extends JsonDataParser {
 
 /* Email parsing */
 include_once "class.mailparse.php";
-class ApiEmailDataParser extends EmailDataParser {
+class ApiEmailDataParser extends EmailDataParser
+{
 
-    function parse($stream) {
+    function parse($stream)
+    {
         return $this->fixup(parent::parse($stream));
     }
 
-    function fixup($data) {
+    function fixup($data)
+    {
         global $cfg;
 
-        if(!$data) return $data;
+        if (!$data) return $data;
 
         $data['source'] = 'Email';
 
-        if(!$data['subject'])
+        if (!$data['subject'])
             $data['subject'] = '[No Subject]';
 
-        if(!$data['emailId'])
+        if (!$data['emailId'])
             $data['emailId'] = $cfg->getDefaultEmailId();
 
-        if(!$cfg->useEmailPriority())
+        if (!$cfg->useEmailPriority())
             unset($data['priorityId']);
 
         return $data;
     }
 }
-?>

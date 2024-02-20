@@ -4851,32 +4851,36 @@ EOF;
         $status=$this->getStatus();
         $priority=$this->getPriority();
         // $category=$this->getCategory();
-        return [
-            'id' => $this->getNumber(),
-            'subject' => $this->getSubject(),
-            'topic' => ['id' => $topic->getId(), 'name' => $topic->getName()],
-            'status' => ['id' => $status->getId(), 'name' => $status->getName()],
-            'category' => $this->getCategory(),
-            'priority' => ['id' => $priority->getId(), 'name' => $priority->getTag()],
-            'department' => $this->getDeptName(),
-            'timestamps' => [
-                'create' => $this->getCreateDate(),
-                'due' => $this->getEstDueDate(),
-                'close' => $this->getCloseDate(),
-                'last_message' => $this->getLastMsgDate(),
-                'last_response' => $this->getLastRespDate(),
-            ],
-            'user' => [
-                'fullname'=>$this->getName()->getFull(),
-                'firstname'=>$this->getName()->getFirst(),
-                'lastname'=>$this->getName()->getLast(),
-                'email'=>$this->getEmail()->email,
-                'phone'=>$this->getPhoneNumber(),
-            ],
-            'source' => $this->getSource(),
-            'assigned_to' => $this->getAssignees(),
-            'threads' =>$thread_entries
+        $response =  [
+            'status' => 'success',
+            'data' => [
+                'id' => $this->getNumber(),
+                'subject' => $this->getSubject(),
+                'topic' => ['id' => $topic->getId(), 'name' => $topic->getName()],
+                'status' => ['id' => $status->getId(), 'name' => $status->getName()],
+                'category' => $this->getCategory(),
+                'priority' => ['id' => $priority->getId(), 'name' => $priority->getTag()],
+                'department' => $this->getDeptName(),
+                'timestamps' => [
+                    'create' => $this->getCreateDate(),
+                    'due' => $this->getEstDueDate(),
+                    'close' => $this->getCloseDate(),
+                    'last_message' => $this->getLastMsgDate(),
+                    'last_response' => $this->getLastRespDate(),
+                ],
+                'user' => [
+                    'fullname'=>$this->getName()->getFull(),
+                    'firstname'=>$this->getName()->getFirst(),
+                    'lastname'=>$this->getName()->getLast(),
+                    'email'=>$this->getEmail()->email,
+                    'phone'=>$this->getPhoneNumber(),
+                ],
+                'source' => $this->getSource(),
+                'assigned_to' => $this->getAssignees(),
+                'threads' =>$thread_entries
+             ]
         ];
+        return $response;
     }
 }
 RolePermission::register(/* @trans */ 'Tickets', Ticket::getPermissions(), true);
