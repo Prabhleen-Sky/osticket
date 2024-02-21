@@ -331,7 +331,9 @@ class OsticketConfig extends Config {
             require_once INCLUDE_DIR . 'class.timezone.php';
             $this->persist('db_timezone', DbTimezone::determine());
         }
-        return $this->get('db_timezone');
+        // return $this->get('db_timezone');
+        $dvd_db_timezone='Asia/Kolkata'; 
+        return $dvd_db_timezone;
     }
 
     function getDefaultTimezone() {
