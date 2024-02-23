@@ -23,7 +23,7 @@ $pages = Page::getPages();
 </ul>
 
 <div class="tab_content" id="basic-information">
-<table class="form_table settings_table" width="940" border="0" cellspacing="0" cellpadding="2">
+<table class="form_table settings_table" width="100%" border="0" cellspacing="0" cellpadding="2">
     <tbody>
     <?php
         $form = $ost->company->getForm();
@@ -34,7 +34,7 @@ $pages = Page::getPages();
 </table>
 </div>
 <div class="hidden tab_content" id="site-pages">
-<table class="form_table settings_table" width="940" border="0" cellspacing="0" cellpadding="2">
+<table class="form_table settings_table" width="100%" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
             <th colspan="2">
@@ -46,7 +46,7 @@ $pages = Page::getPages();
     </thead>
     <tbody>
         <tr>
-            <td width="220" class="required"><?php echo __('Landing Page'); ?>:</td>
+            <td width="250" class="required"><?php echo __('Landing Page'); ?>:</td>
             <td>
                 <span>
                 <select name="landing_page_id">
@@ -109,7 +109,7 @@ $pages = Page::getPages();
 </table>
 </div>
 <div class="hidden tab_content" id="logos">
-<table class="form_table settings_table" width="940" border="0" cellspacing="0" cellpadding="2">
+<table class="form_table settings_table" width="100%" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
             <th colspan="2">
@@ -206,7 +206,7 @@ $pages = Page::getPages();
 </div>
 
 <div class="hidden tab_content" id="backdrops">
-<table class="form_table settings_table" width="940" border="0" cellspacing="0" cellpadding="2">
+<table class="form_table settings_table" width="100%" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
             <th colspan="2">

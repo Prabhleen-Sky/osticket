@@ -200,7 +200,7 @@ if ($closedTickets) {?>
     </small>
 </div>
 </h1>
-<table id="ticketTable" width="800" border="0" cellspacing="0" cellpadding="0">
+<table id="ticketTable" width="100%" border="0" cellspacing="0" cellpadding="0">
     <caption><?php echo $showing; ?></caption>
     <thead>
         <tr>
