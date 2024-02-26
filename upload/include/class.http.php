@@ -35,6 +35,19 @@ class Http {
 
     static function response($code,$content=false,$contentType='text/html',$charset='UTF-8') {
 
+        if (in_array($code, [400, 401, 403, 404, 405, 416, 418, 422,500])) {
+            // Get the file path and line number where the function was called
+            $trace = debug_backtrace();
+            $caller = $trace[0];
+            $filePath = $caller['file'];
+            $lineNumber = $caller['line'];
+
+            // Log the error to the custom logger file
+            $logMessage = "[" . date('d-M-Y H:i:s T') . "] $content ";
+            $logMessage .= " ,Error occurred in file: $filePath at line: $lineNumber\n";
+            file_put_contents('custom_logger.log', $logMessage, FILE_APPEND);
+        }
+
         header('HTTP/1.1 '.Http::header_code_verbose($code));
 		header('Status: '.Http::header_code_verbose($code)."\r\n");
 		header("Connection: Close\r\n");

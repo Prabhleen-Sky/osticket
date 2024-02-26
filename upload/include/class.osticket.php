@@ -251,14 +251,41 @@ class osTicket {
     }
 
     function logInfo($title, $message, $alert=false) {
+        $trace = debug_backtrace();
+        $caller = $trace[0];
+        $filePath = $caller['file'];
+        $lineNumber = $caller['line'];
+
+        $logMessage = "[" . date('d-M-Y H:i:s T') . "] $message";
+        $logMessage .= " ,Infromation message from: $filePath at line: $lineNumber\n\n";
+        file_put_contents('/var/www/html/osticket/upload/scp/custom_logger.log', $logMessage, FILE_APPEND);
+
         return $this->log(LOG_INFO, $title, $message, $alert);
     }
 
     function logWarning($title, $message, $alert=true) {
+        $trace = debug_backtrace();
+        $caller = $trace[0];
+        $filePath = $caller['file'];
+        $lineNumber = $caller['line'];
+
+        $logMessage = "[" . date('d-M-Y H:i:s T') . "] $message ";
+        $logMessage .= " ,Warning occurred in file: $filePath at line: $lineNumber\n\n";
+        file_put_contents('/var/www/html/osticket/upload/scp/custom_logger.log', $logMessage, FILE_APPEND);
+
         return $this->log(LOG_WARN, $title, $message, $alert);
     }
 
     function logError($title, $error, $alert=true) {
+        $trace = debug_backtrace();
+        $caller = $trace[0];
+        $filePath = $caller['file'];
+        $lineNumber = $caller['line'];
+    
+        $logMessage = "[" . date('d-M-Y H:i:s T') . "] $error";
+        $logMessage .= " , Error occurred in file: $filePath at line: $lineNumber\n\n";
+        file_put_contents('/var/www/html/osticket/upload/scp/custom_logger.log', $logMessage, FILE_APPEND);
+    
         return $this->log(LOG_ERR, $title, $error, $alert);
     }
 
@@ -275,6 +302,15 @@ class osTicket {
         // Prevent recursive loops through this code path
         if (substr_count($bt, __FUNCTION__) > 1)
             return;
+
+        $trace = debug_backtrace();
+        $caller = $trace[0];
+        $filePath = $caller['file'];
+        $lineNumber = $caller['line'];
+    
+        $logMessage = "[" . date('d-M-Y H:i:s T') . "] $error";
+        $logMessage .= " , DB Error occurred in file: $filePath at line: $lineNumber\n\n";
+        file_put_contents('/var/www/html/osticket/upload/scp/custom_logger.log', $logMessage, FILE_APPEND);
 
         return $this->log(LOG_ERR, $title, $error, $alert);
     }

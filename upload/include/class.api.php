@@ -385,6 +385,11 @@ class ApiController
             $msg .= "\n*[" . $_SERVER['HTTP_X_API_KEY'] . "]*\n";
         $ost->logWarning(__('API Error') . " ($code)", $msg, false);
 
+         // Write the error to the log file
+         $logMessage = "[" . date('d-M-Y H:i:s T') . "] $error";
+         $logMessage .= " , Error occurred in file: " . __FILE__ . " at line: " . __LINE__ . "\n\n";
+         file_put_contents('api_errors.log', $logMessage, FILE_APPEND);
+
         if (PHP_SAPI == 'cli') {
             fwrite(STDERR, "({$code}) $error\n");
         } else {
