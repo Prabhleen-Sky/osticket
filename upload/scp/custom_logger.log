@@ -122,3 +122,13 @@ mail() returned failure
 [27-Feb-2024 08:07:48 UTC] No such ticket  ,Error occurred in file: /var/www/html/osticket/upload/include/ajax.tickets.php at line: 244
 [27-Feb-2024 08:12:54 UTC] No such ticket  ,Error occurred in file: /var/www/html/osticket/upload/include/ajax.tickets.php at line: 244
 [27-Feb-2024 08:13:13 UTC] No such ticket  ,Error occurred in file: /var/www/html/osticket/upload/include/ajax.tickets.php at line: 244
+[27-Feb-2024 09:17:22 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[27-Feb-2024 09:17:42 UTC] No such ticket  ,Error occurred in file: /var/www/html/osticket/upload/include/ajax.tickets.php at line: 244
+[27-Feb-2024 09:18:01 UTC] No such ticket  ,Error occurred in file: /var/www/html/osticket/upload/include/ajax.tickets.php at line: 244
+[27-Feb-2024 09:52:59 UTC] No such ticket  ,Error occurred in file: /var/www/html/osticket/upload/include/ajax.tickets.php at line: 244
+[27-Feb-2024 10:20:35 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[27-Feb-2024 10:22:54 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[27-Feb-2024 10:54:12 UTC] No such ticket  ,Error occurred in file: /var/www/html/osticket/upload/include/ajax.tickets.php at line: 244
+[27-Feb-2024 11:15:51 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[27-Feb-2024 11:15:53 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[27-Feb-2024 11:15:54 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135

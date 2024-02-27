@@ -191,7 +191,7 @@ else
                 </td>
                 <td>&nbsp;
                     <a class="preview"
-                        href="users.php?id=<?php echo $U['id']; ?>"
+                        href="users.php?id=<?php echo base64_encode($U['id']); ?>"
                         data-preview="#users/<?php echo $U['id']; ?>/preview"><?php
                         echo Format::htmlchars($name); ?></a>
                     &nbsp;

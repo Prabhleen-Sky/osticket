@@ -569,7 +569,7 @@ else
         action="<?php echo $action; ?>"
         name="task_reply" method="post" enctype="multipart/form-data">
         <?php csrf_token(); ?>
-        <input type="hidden" name="id" value="<?php echo $task->getId(); ?>">
+        <input type="hidden" name="id" value="<?php echo base64_encode($task->getId()); ?>">
         <input type="hidden" name="a" value="postreply">
         <input type="hidden" name="lockCode" value="<?php echo ($mylock) ? $mylock->getCode() : ''; ?>">
         <span class="error"></span>

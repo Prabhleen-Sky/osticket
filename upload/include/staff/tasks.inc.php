@@ -406,18 +406,18 @@ if ($thisstaff->hasPerm(Task::PERM_DELETE, false)) {
                 <?php } ?>
                 <td nowrap>
                   <a class="preview"
-                    href="tasks.php?id=<?php echo $T['id']; ?>"
+                    href="tasks.php?id=<?php echo base64_encode($T['id']); ?>"
                     data-preview="#tasks/<?php echo $T['id']; ?>/preview"
                     ><?php echo $number; ?></a></td>
                 <td nowrap>
                   <a class="preview"
-                    href="tickets.php?id=<?php echo $T['ticket__ticket_id']; ?>"
+                    href="tickets.php?id=<?php echo base64_encode($T['ticket__ticket_id']); ?>"
                     data-preview="#tickets/<?php echo $T['ticket__ticket_id']; ?>/preview"
                     ><?php echo $T['ticket__number']; ?></a></td>
                 <td align="center" nowrap><?php echo
                 Format::datetime($T[$date_col ?: 'created']); ?></td>
                 <td><a <?php if ($flag) { ?> class="Icon <?php echo $flag; ?>Ticket" title="<?php echo ucfirst($flag); ?> Ticket" <?php } ?>
-                    href="tasks.php?id=<?php echo $T['id']; ?>"><?php
+                    href="tasks.php?id=<?php echo base64_encode($T['id']); ?>"><?php
                     echo $title; ?></a>
                      <?php
                         if ($threadcount>1)
@@ -500,7 +500,8 @@ $(function() {
         $.dialog(url, [201], function (xhr) {
             var tid = parseInt(xhr.responseText);
             if (tid) {
-                 window.location.href = 'tasks.php?id='+tid;
+                var newId = base64_encode(tid);
+                 window.location.href = 'tasks.php?id='+newId;
             } else {
                 $.pjax.reload('#pjax-container');
             }

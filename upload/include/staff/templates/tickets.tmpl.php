@@ -157,7 +157,7 @@ if ($total) { ?>
               <a class="Icon <?php
                 echo strtolower($T['source']); ?>Ticket preview"
                 title="<?php echo __('Preview Ticket'); ?>"
-                href="tickets.php?id=<?php echo $T['ticket_id']; ?>"
+                href="tickets.php?id=<?php echo base64_encode($T['ticket_id']); ?>"
                 data-preview="#tickets/<?php echo $T['ticket_id']; ?>/preview"><?php
                 echo $tid; ?></a>
                <?php

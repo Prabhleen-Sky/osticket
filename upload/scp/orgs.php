@@ -18,7 +18,7 @@ require_once INCLUDE_DIR . 'class.note.php';
 
 $org = null;
 if ($_REQUEST['id'] || $_REQUEST['org_id'])
-    $org = Organization::lookup($_REQUEST['org_id'] ?: $_REQUEST['id']);
+    $org = Organization::lookup(base64_decode($_REQUEST['org_id']) ?: base64_decode($_REQUEST['id']));
 
 if ($_POST) {
     switch ($_REQUEST['a']) {

@@ -140,7 +140,7 @@ else
             <td nowrap align="center">
                 <input type="checkbox" value="<?php echo $org['id']; ?>" class="ckb mass nowarn"/>
             </td>
-            <td>&nbsp; <a href="orgs.php?id=<?php echo $org['id']; ?>"><?php
+            <td>&nbsp; <a href="orgs.php?id=<?php echo base64_encode($org['id']); ?>"><?php
             echo $org['name']; ?></a> </td>
             <td>&nbsp;<?php echo $org['user_count']; ?></td>
             <td><?php echo Format::date($org['created']); ?></td>

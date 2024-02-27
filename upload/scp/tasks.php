@@ -18,7 +18,7 @@ require_once(INCLUDE_DIR.'class.export.php');
 $page = '';
 $task = null; //clean start.
 if ($_REQUEST['id']) {
-    if (!($task=Task::lookup($_REQUEST['id'])))
+    if (!($task=Task::lookup(base64_decode($_REQUEST['id']))))
          $errors['err'] = sprintf(__('%s: Unknown or invalid ID.'), __('task'));
     elseif (!$task->checkStaffPerm($thisstaff)) {
         $errors['err'] = __('Access denied. Contact admin if you believe this is in error');

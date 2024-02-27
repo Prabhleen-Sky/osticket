@@ -20,7 +20,7 @@ if (!$thisstaff->hasPerm(User::PERM_DIRECTORY))
 require_once INCLUDE_DIR.'class.note.php';
 
 $user = null;
-if ($_REQUEST['id'] && !($user=User::lookup($_REQUEST['id'])))
+if ($_REQUEST['id'] && !($user=User::lookup(base64_decode($_REQUEST['id']))))
     $errors['err'] = sprintf(__('%s: Unknown or invalid'), _N('end user', 'end users', 1));
 
 if ($_POST) {
