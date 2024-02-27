@@ -32,8 +32,10 @@ $page='';
 $ticket = $user = null; //clean start.
 $redirect = false;
 //LOCKDOWN...See if the id provided is actually valid and if the user has access.
+//$_REQUEST['id'] = base64_decode($_REQUEST['id']);
+
 if(isset($_REQUEST['id']) || isset($_REQUEST['number'])) {
-    if($_REQUEST['id'] && !($ticket=Ticket::lookup($_REQUEST['id'])))
+    if($_REQUEST['id'] && !($ticket=Ticket::lookup(base64_decode($_REQUEST['id']))))
          $errors['err']=sprintf(__('%s: Unknown or invalid ID.'), __('ticket'));
     elseif($_REQUEST['number'] && !($ticket=Ticket::lookup(array('number' => $_REQUEST['number']))))
          $errors['err']=sprintf(__('%s: Unknown or invalid number.'), __('ticket'));

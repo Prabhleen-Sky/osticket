@@ -3106,7 +3106,7 @@ extends TicketLinkFilter {
     function filter($text, $row) {
         $link = $this->getLink($row);
         return sprintf('<a style="display: inline" class="preview" data-preview="#tickets/%d/preview" href="%s">%s</a>',
-            $row['ticket_id'], $link, $text);
+            base64_encode($row['ticket_id']), $link, $text);
     }
 }
 QueueColumnFilter::register('TicketLinkWithPreviewFilter', __('Link'));

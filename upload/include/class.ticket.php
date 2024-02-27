@@ -4760,7 +4760,7 @@ implements RestrictedAccess, Threadable, Searchable {
 
         switch (true) {
         case ($thisstaff instanceof Staff):
-            return ROOT_PATH . sprintf('scp/tickets.php?id=%s', $id);
+            return ROOT_PATH . sprintf('scp/tickets.php?id=%s', base64_encode($id));
         }
     }
 
