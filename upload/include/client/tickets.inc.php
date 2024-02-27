@@ -247,7 +247,7 @@ if ($closedTickets) {?>
             <tr id="<?php echo $T['ticket_id']; ?>">
                 <td>
                 <a class="Icon <?php echo strtolower($T['source']); ?>Ticket" title="<?php echo $T['user__default_email__address']; ?>"
-                    href="tickets.php?id=<?php echo $T['ticket_id']; ?>"><?php echo $ticketNumber; ?></a>
+                    href="tickets.php?id=<?php echo base64_encode($T['ticket_id']); ?>"><?php echo $ticketNumber; ?></a>
                 </td>
                 <td><?php echo Format::date($T['created']); ?></td>
                 <td><?php echo $status; ?></td>

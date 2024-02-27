@@ -24,6 +24,7 @@ require_once(INCLUDE_DIR.'class.ticket.php');
 require_once(INCLUDE_DIR.'class.json.php');
 $ticket=null;
 if($_REQUEST['id']) {
+    $_REQUEST['id'] = base64_decode($_REQUEST['id']);
     if (!($ticket = Ticket::lookup($_REQUEST['id']))) {
         $errors['err']=__('Unknown or invalid ticket ID.');
     } elseif(!$ticket->checkUserAccess($thisclient)) {

@@ -104,3 +104,17 @@ mail() returned failure
                 Email-Sent-Via: alerts@droom.in  ,Warning occurred in file: /var/www/html/osticket/upload/include/class.staff.php at line: 1128
 
 [26-Feb-2024 11:05:10 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[26-Feb-2024 11:16:25 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[26-Feb-2024 11:16:59 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[26-Feb-2024 11:38:30 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[26-Feb-2024 13:25:32 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[26-Feb-2024 13:25:45 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[26-Feb-2024 17:06:35 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[26-Feb-2024 17:06:47 UTC] Must login: Authentication Required  ,Error occurred in file: /var/www/html/osticket/upload/scp/ajax.php at line: 20
+[26-Feb-2024 17:06:49 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[26-Feb-2024 17:16:04 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[27-Feb-2024 05:05:16 UTC] Must login: Authentication Required  ,Error occurred in file: /var/www/html/osticket/upload/scp/ajax.php at line: 20
+[27-Feb-2024 05:05:17 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[27-Feb-2024 05:05:32 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[27-Feb-2024 06:38:15 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[27-Feb-2024 06:38:15 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
