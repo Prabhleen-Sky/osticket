@@ -68,7 +68,7 @@ $showing=$pageNav->showing().' '._N('custom list', 'custom lists', $count);
                 }
                 ?>
             </td>
-            <td><a href="?id=<?php echo $list->getId(); ?>"><?php echo
+            <td><a href="?id=<?php echo base64_encode($list->getId()); ?>"><?php echo
             $list->getPluralName() ?: $list->getName(); ?></a></td>
             <td><?php echo $list->get('created'); ?></td>
             <td><?php echo $list->get('updated'); ?></td>

@@ -6,7 +6,7 @@ require_once INCLUDE_DIR.'class.businesshours.php';
 $errors = array();
 $schedule = null;
 if ($_REQUEST['id'])
-    $schedule = Schedule::lookup($_REQUEST['id']);
+    $schedule = Schedule::lookup(base64_decode($_REQUEST['id']));
 
 if ($_POST) {
     switch (strtolower($_REQUEST['do'])) {

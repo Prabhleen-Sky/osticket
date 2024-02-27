@@ -69,7 +69,7 @@ csrf_token(); ?>
                 }
                 ?>
             </td>
-            <td><a href="?id=<?php echo $id; ?>"><?php echo
+            <td><a href="?id=<?php echo base64_encode($id); ?>"><?php echo
             $role->getLocal('name'); ?></a></td>
             <td>&nbsp;<?php echo $role->isEnabled() ? __('Active') :
             '<b>'.__('Disabled').'</b>'; ?></td>

@@ -6,6 +6,7 @@ require_once(INCLUDE_DIR.'class.list.php');
 $list=null;
 $criteria=array();
 $redirect = false;
+$_REQUEST['id'] = base64_decode($_REQUEST['id']);
 if ($_REQUEST['id'])
     $criteria['id'] = $_REQUEST['id'];
 elseif ($_REQUEST['type'])

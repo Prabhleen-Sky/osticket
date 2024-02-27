@@ -17,7 +17,7 @@ require('admin.inc.php');
 include_once(INCLUDE_DIR.'class.email.php');
 
 $email=null;
-if($_REQUEST['id'] && !($email=Email::lookup($_REQUEST['id'])))
+if($_REQUEST['id'] && !($email=Email::lookup(base64_decode($_REQUEST['id']))))
     $errors['err']=sprintf(__('%s: Unknown or invalid ID.'), __('email'));
 
 if($_POST){

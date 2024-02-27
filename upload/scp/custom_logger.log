@@ -132,3 +132,4 @@ mail() returned failure
 [27-Feb-2024 11:15:51 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
 [27-Feb-2024 11:15:53 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
 [27-Feb-2024 11:15:54 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135
+[27-Feb-2024 12:20:48 UTC]   ,Error occurred in file: /var/www/html/osticket/upload/scp/login.php at line: 135

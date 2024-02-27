@@ -18,7 +18,7 @@ include_once(INCLUDE_DIR.'class.template.php');
 
 $template=null;
 if($_REQUEST['tpl_id'] &&
-        !($template=EmailTemplateGroup::lookup($_REQUEST['tpl_id'])))
+        !($template=EmailTemplateGroup::lookup(base64_decode($_REQUEST['tpl_id']))))
     $errors['err']=sprintf(__('%s: Unknown or invalid'), __('template set'));
 elseif($_REQUEST['id'] &&
         !($template=EmailTemplate::lookup($_REQUEST['id'])))

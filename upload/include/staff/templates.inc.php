@@ -113,7 +113,7 @@ else
                   <input type="checkbox" class="ckb" name="ids[]" value="<?php echo $row['tpl_id']; ?>"
                             <?php echo $sel?'checked="checked"':''; ?> <?php echo $default?'disabled="disabled"':''; ?> >
                 </td>
-                <td>&nbsp;<a href="templates.php?tpl_id=<?php echo $row['tpl_id']; ?>"><?php echo Format::htmlchars($row['name']); ?></a>
+                <td>&nbsp;<a href="templates.php?tpl_id=<?php echo base64_encode($row['tpl_id']); ?>"><?php echo Format::htmlchars($row['name']); ?></a>
                 &nbsp;<?php echo $default; ?></td>
                 <td>&nbsp;<?php echo $row['isactive']?__('Active'):'<b>'.__('Disabled').'</b>'; ?></td>
                 <td>&nbsp;&nbsp;<?php echo ($inuse)?'<b>'.__('Yes').'</b>':__('No'); ?></td>

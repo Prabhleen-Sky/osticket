@@ -114,7 +114,7 @@ $qstr .= '&amp;order='.urlencode($order=='DESC' ? 'ASC' : 'DESC');
                   <input type="checkbox" class="ckb" name="ids[]"
                   value="<?php echo $id; ?>"
                             <?php echo $sel ? 'checked="checked"' : ''; ?>> </td>
-                <td><a href="teams.php?id=<?php echo $id; ?>"><?php echo
+                <td><a href="teams.php?id=<?php echo base64_encode($id); ?>"><?php echo
                 $team->getName(); ?></a> &nbsp;</td>
                 <td>&nbsp;<?php echo $team->isActive() ? __('Active') : '<b>'.__('Disabled').'</b>'; ?></td>
                 <td style="text-align:right;padding-right:25px">&nbsp;&nbsp;

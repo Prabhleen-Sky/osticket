@@ -16,7 +16,7 @@
 require('admin.inc.php');
 
 $team=null;
-if($_REQUEST['id'] && !($team=Team::lookup($_REQUEST['id'])))
+if($_REQUEST['id'] && !($team=Team::lookup(base64_decode($_REQUEST['id']))))
     $errors['err']=sprintf(__('%s: Unknown or invalid'), __('team'));
 
 if($_POST){

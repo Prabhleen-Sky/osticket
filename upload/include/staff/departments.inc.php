@@ -139,7 +139,7 @@ $showing = $pageNav->showing().' '._N('department', 'departments', $count);
                   <?php echo $default? 'disabled="disabled"' : ''; ?> >
                 </td>
                 <td>
-                  <a href="departments.php?id=<?php echo $id; ?>"><?php
+                  <a href="departments.php?id=<?php echo base64_encode($id); ?>"><?php
                 echo Dept::getNameById($id); ?></a>&nbsp;<?php echo $default; ?>
                 </td>
                 <td><?php

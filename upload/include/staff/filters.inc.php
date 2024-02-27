@@ -115,7 +115,7 @@ else
                   <input type="checkbox" class="ckb" name="ids[]" value="<?php echo $row['id']; ?>"
                             <?php echo $sel?'checked="checked"':''; ?>>
                 </td>
-                <td>&nbsp;<a href="filters.php?id=<?php echo $row['id']; ?>"><?php echo Format::htmlchars($row['name']); ?></a>
+                <td>&nbsp;<a href="filters.php?id=<?php echo base64_encode($row['id']); ?>"><?php echo Format::htmlchars($row['name']); ?></a>
                   <?php
                     if ($row['flags'] & Filter::FLAG_INACTIVE_DEPT)
                       echo '<a data-placement="bottom" data-toggle="tooltip" title="Inactive Department Selected"

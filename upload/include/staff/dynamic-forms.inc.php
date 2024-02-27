@@ -64,7 +64,7 @@ $showing=$pageNav->showing().' '._N('form','forms',$count);
             ->order_by('type', 'title') as $form) { ?>
         <tr>
         <td align="center"><i class="<?php echo $forms[$form->get('type')]; ?>"></i></td>
-            <td><a href="?id=<?php echo $form->get('id'); ?>">
+            <td><a href="?id=<?php echo base64_encode($form->get('id')); ?>">
                 <?php echo $form->get('title'); ?></a>
             <td><?php echo $form->get('updated'); ?></td>
         </tr>
@@ -90,7 +90,7 @@ $showing=$pageNav->showing().' '._N('form','forms',$count);
                 <input type="checkbox" class="ckb" name="ids[]" value="<?php echo $form->get('id'); ?>"
                     <?php echo $sel?'checked="checked"':''; ?>>
             <?php } ?></td>
-            <td><a href="?id=<?php echo $form->get('id'); ?>"><?php echo $form->get('title'); ?></a></td>
+            <td><a href="?id=<?php echo base64_encode($form->get('id')); ?>"><?php echo $form->get('title'); ?></a></td>
             <td><?php echo $form->get('updated'); ?></td>
         </tr>
     <?php }

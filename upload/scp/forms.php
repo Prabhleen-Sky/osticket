@@ -3,7 +3,7 @@ require('admin.inc.php');
 require_once(INCLUDE_DIR."/class.dynamic_forms.php");
 
 $form=null;
-if($_REQUEST['id'] && !($form=DynamicForm::lookup($_REQUEST['id'])))
+if($_REQUEST['id'] && !($form=DynamicForm::lookup(base64_decode($_REQUEST['id']))))
     $errors['err']=sprintf(__('%s: Unknown or invalid ID.'), __('custom form'));
 
 if($_POST) {

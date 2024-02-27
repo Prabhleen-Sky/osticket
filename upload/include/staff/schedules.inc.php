@@ -65,7 +65,7 @@ $showing=$pageNav->showing().' '._N('schedule', 'schedules', $count);
                 value="<?php echo $schedule->getId(); ?>"
                     <?php echo $sel?'checked="checked"':''; ?>>
             </td>
-            <td><a href="?id=<?php echo $schedule->getId(); ?>"><?php echo
+            <td><a href="?id=<?php echo base64_encode($schedule->getId()); ?>"><?php echo
             $schedule->getName(); ?></a><span class="pull-right"><small
             class="faded-more"><i class="icon-calendar"></i> <?php
             echo $schedule->getNumEntries(); ?></small></span>

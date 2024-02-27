@@ -17,7 +17,7 @@ require('admin.inc.php');
 include_once(INCLUDE_DIR.'class.api.php');
 
 $api=null;
-if($_REQUEST['id'] && !($api=API::lookup($_REQUEST['id'])))
+if($_REQUEST['id'] && !($api=API::lookup(base64_decode($_REQUEST['id']))))
     $errors['err']=sprintf(__('%s: Unknown or invalid ID.'), __('API Key'));
 
 if($_POST){

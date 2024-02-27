@@ -119,7 +119,7 @@ $qstr .= '&amp;order='.($order=='DESC' ? 'ASC' : 'DESC');
                   <input type="checkbox" class="ckb" name="ids[]" value="<?php echo $id; ?>"
                     <?php echo $sel ? 'checked="checked"' :'' ; ?>>
                 </td>
-                <td>&nbsp;<a href="slas.php?id=<?php echo $id;
+                <td>&nbsp;<a href="slas.php?id=<?php echo base64_encode($id);
                     ?>"><?php echo Format::htmlchars($sla->getName());
                     ?></a>&nbsp;<?php echo $default; ?></td>
                 <td><?php echo $sla->isActive() ? __('Active') : '<b>'.__('Disabled').'</b>'; ?></td>

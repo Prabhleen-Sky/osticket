@@ -25,7 +25,7 @@ include_once INCLUDE_DIR . 'class.thread.php';
 
 $errors = array();
 $role=null;
-if ($_REQUEST['id'] && !($role = Role::lookup($_REQUEST['id'])))
+if ($_REQUEST['id'] && !($role = Role::lookup(base64_decode($_REQUEST['id']))))
     $errors['err'] = sprintf(__('%s: Unknown or invalid ID.'),
         __('Role'));
 

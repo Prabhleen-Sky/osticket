@@ -2,7 +2,7 @@
 require('admin.inc.php');
 require_once(INCLUDE_DIR."/class.plugin.php");
 
-if($_REQUEST['id'] && !($plugin=Plugin::lookup($_REQUEST['id'])))
+if($_REQUEST['id'] && !($plugin=Plugin::lookup(base64_decode($_REQUEST['id']))))
     $errors['err']=sprintf(__('%s: Unknown or invalid ID.'),
         __('plugin'));
 

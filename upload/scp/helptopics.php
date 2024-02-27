@@ -19,7 +19,7 @@ include_once(INCLUDE_DIR.'class.faq.php');
 require_once(INCLUDE_DIR.'class.dynamic_forms.php');
 
 $topic=null;
-if($_REQUEST['id'] && !($topic=Topic::lookup($_REQUEST['id'])))
+if($_REQUEST['id'] && !($topic=Topic::lookup(base64_decode($_REQUEST['id']))))
     $errors['err']=sprintf(__('%s: Unknown or invalid ID.'), __('help topic'));
 
 if($_POST){

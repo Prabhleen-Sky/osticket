@@ -146,7 +146,7 @@ $order_by = 'sort';
                     if ($cfg->getTopicSortMode() == 'm') { ?>
                         <i class="icon-sort faded"></i>
                     <?php } ?>
-                    <a href="helptopics.php?id=<?php echo $id; ?>"><?php
+                    <a href="helptopics.php?id=<?php echo base64_encode($id); ?>"><?php
                     echo Topic::getTopicName($id); ?></a>&nbsp;
                 </td>
                 <td><?php

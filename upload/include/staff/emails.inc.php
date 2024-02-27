@@ -105,7 +105,7 @@ $def_priority = ($c = $cfg->getDefaultPriority()) ? $c->getDesc() : '';
                     <?php echo $sel ? 'checked="checked" ' : ''; ?>
                     <?php echo $default?'disabled="disabled" ':''; ?>>
                 </td>
-                <td><span class="ltr"><a href="emails.php?id=<?php echo $id; ?>"><?php
+                <td><span class="ltr"><a href="emails.php?id=<?php echo base64_encode($id); ?>"><?php
                     echo Format::htmlchars((string) $email); ?></a></span>
                 <?php echo ($default) ?' <small>'.__('(Default)').'</small>' : ''; ?>
                 </td>

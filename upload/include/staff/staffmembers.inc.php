@@ -199,7 +199,7 @@ $agents->limit($pageNav->getLimit())->offset($pageNav->getStart());
                 <td align="center">
                   <input type="checkbox" class="ckb" name="ids[]"
                   value="<?php echo $id; ?>" <?php echo $sel ? 'checked="checked"' : ''; ?> >
-                <td><a href="staff.php?id=<?php echo $id; ?>"><?php echo
+                <td><a href="staff.php?id=<?php echo base64_encode($id); ?>"><?php echo
                 Format::htmlchars((string) $agent->getName()); ?></a></td>
                 <td><?php echo $agent->getUserName(); ?></td>
                 <td><?php echo $agent->isActive() ? __('Active') :'<b>'.__('Locked').'</b>'; ?><?php

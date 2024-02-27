@@ -18,7 +18,7 @@ include_once(INCLUDE_DIR.'class.filter.php');
 require_once(INCLUDE_DIR.'class.canned.php');
 
 $filter=null;
-if($_REQUEST['id'] && !($filter=Filter::lookup($_REQUEST['id'])))
+if($_REQUEST['id'] && !($filter=Filter::lookup(base64_decode($_REQUEST['id']))))
     $errors['err']=sprintf(__('%s: Unknown or invalid'), __('ticket filter'));
 
 /* NOTE: Banlist has its own interface*/

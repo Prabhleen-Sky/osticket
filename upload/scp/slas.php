@@ -17,7 +17,7 @@ require('admin.inc.php');
 include_once(INCLUDE_DIR.'class.sla.php');
 
 $sla=null;
-if($_REQUEST['id'] && !($sla=SLA::lookup($_REQUEST['id'])))
+if($_REQUEST['id'] && !($sla=SLA::lookup(base64_decode($_REQUEST['id']))))
     $errors['err']=sprintf(__('%s: Unknown or invalid ID.'),
         __('SLA Plan'));
 
